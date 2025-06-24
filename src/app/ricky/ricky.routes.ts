@@ -6,4 +6,11 @@ export const rickyRoutes: Routes = [
     loadComponent: () =>
       import('./pages/all-character/all-character').then((m) => m.AllCharacter),
   },
+  {
+    path: ':characterId',
+    loadComponent: () =>
+      import('./pages/single-chacharacter/single-chacharacter').then(
+        (m) => m.SingleChacharacter
+      ),
+  },
 ];

@@ -1,3 +1,10 @@
+export interface Episode {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+}
+
 export interface Character {
   id: number;
   name: string;
@@ -14,7 +21,7 @@ export interface Character {
     url: string;
   };
   image: string; // URL
-  episode: string[]; // Array of episode URLs
+  episode: Episode[]; // Array of episode URLs
   url: string; // Character URL
   created: string; // ISO date string
 }

@@ -1,7 +1,11 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, signal, Signal } from '@angular/core';
-import { charactersResponseAdapter } from '../adapters/character.adapter';
-import { Info } from '../models/character.model';
+import {
+  characterAdapter,
+  charactersResponseAdapter,
+} from '../adapters/character.adapter';
+import { Character, Info } from '../models/character.model';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +16,10 @@ export class RickyClientData {
   private info = signal<Info | null>(null);
 
   page = signal(1);
+
+  getPage() {
+    return this.page;
+  }
 
   subtractPage() {
     if (this.info()?.prev === null) return;
@@ -31,5 +39,15 @@ export class RickyClientData {
         return responseData;
       },
     });
+  }
+
+
+  getCharacterById(id: number) {
+    console.log(`${this.baseUrl}/${id}`);
+    return this.http.get<Character>(`${this.baseUrl}/${id}`).pipe(
+      map((character: Character) => {
+        return characterAdapter(character);
+      })
+    );
   }
 }

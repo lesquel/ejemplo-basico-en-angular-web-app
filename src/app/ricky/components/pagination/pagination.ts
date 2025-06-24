@@ -9,7 +9,8 @@ import { RickyClientData } from '../../services/ricky-client-data';
 })
 export class Pagination {
   private rickyClientData = inject(RickyClientData);
-  
+  page = this.rickyClientData.getPage();
+
   onNextPage() {
     this.rickyClientData.addPage();
   }
